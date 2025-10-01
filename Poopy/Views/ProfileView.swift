@@ -10,10 +10,95 @@ import SwiftUI
 struct ProfileView: View {
     var body: some View {
         VStack {
-            Text("Profile")
-                .foregroundStyle(.white)
+            VStack {
+                Text("Hourly Rate")
+                    .font(.title)
+                    .bold()
+                    .foregroundStyle(.white)
+                    .padding(.bottom, 5)
+                
+                Text("$25.00")
+                    .font(.system(size: 32, weight: .bold))
+                    .foregroundStyle(.green)
+                
+                Button {
+                    
+                } label: {
+                    HStack {
+                        Image(systemName: "pencil")
+                        
+                        Text("Edit Rate")
+                        
+                    }
+                    .font(.system(size: 20))
+                    .bold()
+                    .frame(width: 150, height: 50)
+                    .foregroundStyle(.black)
+                    .background(.green)
+                    .clipShape(RoundedRectangle(cornerRadius: 50))
+                }
+                .buttonStyle(.plain)
+            }
+            .frame(width: 350)
+            .padding()
+            .frame(height: 200)
+            .background(.containerGrey)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            
+            VStack {
+                Text("All Time Stats")
+                    .font(.system(size: 24))
+                    .foregroundStyle(.white)
+                
+                HStack {
+                    VStack {
+                        Text("Total Earnings")
+                            .foregroundStyle(.gray)
+                        
+                        Text("$0.00")
+                            .foregroundStyle(.green)
+                    }
+                    
+                    Spacer()
+                    
+                    VStack {
+                        Text("Total Time")
+                            .foregroundStyle(.gray)
+
+                        Text("0h 0m")
+                            .foregroundStyle(.green)
+                    }
+                }
+                .padding()
+            }
+            .frame(width: 350)
+            .padding()
+            .frame(height: 120)
+            .background(.containerGrey)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            
+            Button {
+                
+            } label: {
+                HStack {
+                    Image(systemName: "eraser")
+                    Text("Reset All Data")
+                }
+                .font(.system(size: 20))
+                .bold()
+                .frame(width: 375, height: 50)
+                .foregroundStyle(.red)
+                .background(.containerGrey)
+                //.border(.red, width: 1) // stupid border gets fucky fucky by the rounded edges
+                .clipShape(RoundedRectangle(cornerRadius: 50))
+                .padding()
+            }
+            
+            Spacer()
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(width: .infinity)
+        .frame(maxHeight: .infinity)
+        .padding()
         .background(.darkBackground)
     }
 }

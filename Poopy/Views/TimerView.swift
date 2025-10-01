@@ -11,7 +11,7 @@ struct TimerView: View {
     var body: some View {
         VStack {
             VStack {
-                Text("Current Poop Break")
+                Text("Current Break")
                     .font(.title)
                     .bold()
                     .foregroundStyle(.white)
@@ -30,7 +30,9 @@ struct TimerView: View {
                 Button {
                     
                 } label: {
-                    Text("Start Pooping")
+                    Text("Start Chilling")
+                        .font(.system(size: 20))
+                        .bold()
                         .frame(width: 300, height: 50)
                         .foregroundStyle(.black)
                         .background(.green)
@@ -101,8 +103,8 @@ struct TimerView: View {
             
             Spacer()
         }
-        .frame(width: .infinity)
         .padding()
+        .frame(width: .infinity)
         .background(.darkBackground)
     }
 }

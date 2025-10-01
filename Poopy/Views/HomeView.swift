@@ -14,7 +14,6 @@ struct HomeView: View {
                 .tabItem {
                     Label("Timer", systemImage: "timer")
                 }
-                .foregroundStyle(.green)
             
             ChallengesView()
                 .tabItem {
@@ -26,6 +25,7 @@ struct HomeView: View {
                     Label("Profile", systemImage: "person.crop.circle")
                 }
         }
+        .tint(.green)
     }
 }
 
