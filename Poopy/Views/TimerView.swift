@@ -33,13 +33,15 @@ struct TimerView: View {
                     Text("Start Chilling")
                         .font(.system(size: 20))
                         .bold()
-                        .frame(width: 300, height: 50)
+                        .frame(height: 50)
+                        .frame(maxWidth: .infinity)
                         .foregroundStyle(.black)
                         .background(.green)
                         .clipShape(RoundedRectangle(cornerRadius: 50))
                 }
             }
-            .frame(width: 370, height: 250)
+            .frame(height: 250)
+            .frame(maxWidth: .infinity)
             .background(.containerGrey)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             
@@ -51,7 +53,8 @@ struct TimerView: View {
                     Text("$0.00")
                         .foregroundStyle(.green)
                 }
-                .frame(width: 120, height: 75)
+                .frame(maxWidth: .infinity)
+                .frame(height: 75)
                 .background(.containerGrey)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 
@@ -63,7 +66,8 @@ struct TimerView: View {
                     Text("$0.00")
                         .foregroundStyle(.green)
                 }
-                .frame(width: 120, height: 75)
+                .frame(maxWidth: .infinity)
+                .frame(height: 75)
                 .background(.containerGrey)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 
@@ -74,12 +78,13 @@ struct TimerView: View {
                     Text("$0.00")
                         .foregroundStyle(.green)
                 }
-                .frame(width: 120, height: 75)
+                .frame(maxWidth: .infinity)
+                .frame(height: 75)
                 .background(.containerGrey)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
             }
-            .frame(width: 350)
             .frame(height: 150)
+            .frame(maxWidth: .infinity)
             
             VStack() {
                 HStack {
@@ -95,9 +100,9 @@ struct TimerView: View {
                     .font(.system(size: 32, weight: .bold))
                     .foregroundStyle(.green)
             }
-            .frame(width: 350)
             .padding()
             .frame(height: 100)
+            .frame(maxWidth: .infinity)
             .background(.containerGrey)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             

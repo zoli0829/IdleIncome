@@ -32,6 +32,7 @@ struct ProfileView: View {
                     }
                     .font(.system(size: 20))
                     .bold()
+                    .frame(maxWidth: .infinity)
                     .frame(width: 150, height: 50)
                     .foregroundStyle(.black)
                     .background(.green)
@@ -39,7 +40,7 @@ struct ProfileView: View {
                 }
                 .buttonStyle(.plain)
             }
-            .frame(width: 350)
+            .frame(maxWidth: .infinity)
             .padding()
             .frame(height: 200)
             .background(.containerGrey)
@@ -71,7 +72,8 @@ struct ProfileView: View {
                 }
                 .padding()
             }
-            .frame(width: 350)
+            .frame(maxWidth: .infinity)
+            //.frame(width: 350)
             .padding()
             .frame(height: 120)
             .background(.containerGrey)
@@ -86,7 +88,8 @@ struct ProfileView: View {
                 }
                 .font(.system(size: 20))
                 .bold()
-                .frame(width: 375, height: 50)
+                .frame(height: 50)
+                .frame(maxWidth: .infinity)
                 .foregroundStyle(.red)
                 .background(.containerGrey)
                 //.border(.red, width: 1) // stupid border gets fucky fucky by the rounded edges
