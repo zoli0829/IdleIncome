@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TimerView: View {
+    @StateObject private var viewModel: TimerModel = TimerModel()
+    
     var body: some View {
         VStack {
             VStack {
@@ -17,7 +19,7 @@ struct TimerView: View {
                     .foregroundStyle(.white)
                     .padding(.bottom, 5)
                 
-                Text("0:00")
+                Text(viewModel.formattedTime)
                     .font(.system(size: 32, weight: .bold))
                     .foregroundStyle(.white)
                     .padding(.bottom, 5)
@@ -28,9 +30,13 @@ struct TimerView: View {
                     .padding(.bottom, 10)
                 
                 Button {
-                    
+                    if viewModel.isRunning {
+                        viewModel.stopTimer()
+                    } else {
+                        viewModel.startTimer()
+                    }
                 } label: {
-                    Text("Start Chilling")
+                    Text(viewModel.isRunning ? "Stop" : "Start Chilling")
                         .font(.system(size: 20))
                         .bold()
                         .frame(height: 50)
