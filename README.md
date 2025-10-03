@@ -18,9 +18,11 @@ IdleIncomee is a playful yet practical app that helps you track how much money y
 
 ## Screenshots
 
-![Home View](screenshots/home.png)  
-![Timer View](screenshots/achievements.png)  
-![Profile View](screenshots/profile.png)  
+<p align="center">
+  <img src="screenshots/home.png" alt="Home View Screenshot" width: "300"/>
+  <img src="screenshots/achievements.png" alt="Achievements Screenshot width: "300""/>
+  <img src="screenshots/profile.png" alt="Profile Screenshot widthL "300"/>
+</p>
 
 ---
 
