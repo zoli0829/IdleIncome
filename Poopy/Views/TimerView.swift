@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimerView: View {
-    @StateObject private var viewModel: TimerModel = TimerModel()
+    @ObservedObject var viewModel: TimerModel
     
     var body: some View {
         VStack {
@@ -24,7 +24,7 @@ struct TimerView: View {
                     .foregroundStyle(.white)
                     .padding(.bottom, 5)
                 
-                Text("$0.00")
+                Text(viewModel.earnedSalary, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                     .font(.system(size: 24, weight: .bold))
                     .foregroundStyle(.green)
                     .padding(.bottom, 10)
@@ -32,6 +32,10 @@ struct TimerView: View {
                 Button {
                     if viewModel.isRunning {
                         viewModel.stopTimer()
+                        // reset curren break timer and current earned money
+                        viewModel.finishBreak()
+                        // update lifetime earnings
+                        // is called from resetCurrentBreakData()
                     } else {
                         viewModel.startTimer()
                     }
@@ -44,6 +48,7 @@ struct TimerView: View {
                         .foregroundStyle(.black)
                         .background(.green)
                         .clipShape(RoundedRectangle(cornerRadius: 50))
+                        .padding(.horizontal)
                 }
             }
             .frame(height: 250)
@@ -56,7 +61,7 @@ struct TimerView: View {
                     Text("Today")
                         .foregroundStyle(.gray)
                     
-                    Text("$0.00")
+                    Text(viewModel.earnedToday, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                         .foregroundStyle(.green)
                 }
                 .frame(maxWidth: .infinity)
@@ -65,11 +70,10 @@ struct TimerView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 
                 VStack {
-                    
                     Text("This Week")
                         .foregroundStyle(.gray)
                     
-                    Text("$0.00")
+                    Text(viewModel.earnedThisWeek, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                         .foregroundStyle(.green)
                 }
                 .frame(maxWidth: .infinity)
@@ -81,7 +85,7 @@ struct TimerView: View {
                     Text("This Month")
                         .foregroundStyle(.gray)
                     
-                    Text("$0.00")
+                    Text(viewModel.earnedThisMonth, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                         .foregroundStyle(.green)
                 }
                 .frame(maxWidth: .infinity)
@@ -102,7 +106,7 @@ struct TimerView: View {
                         .foregroundStyle(.white)
                 }
                 
-                Text("$0.00")
+                Text(viewModel.lifetimeEarnings, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                     .font(.system(size: 32, weight: .bold))
                     .foregroundStyle(.green)
             }
@@ -121,5 +125,5 @@ struct TimerView: View {
 }
 
 #Preview {
-    TimerView()
+    TimerView(viewModel: TimerModel())
 }

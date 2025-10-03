@@ -8,19 +8,21 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var viewModel: TimerModel = TimerModel()
+    
     var body: some View {
         TabView {
-            TimerView()
+            TimerView(viewModel: viewModel)
                 .tabItem {
                     Label("Timer", systemImage: "timer")
                 }
             
-            ChallengesView()
+            ChallengesView(viewModel: viewModel)
                 .tabItem {
                     Label("Challenges", systemImage: "trophy")
                 }
             
-            ProfileView()
+            ProfileView(viewModel: viewModel)
                 .tabItem {
                     Label("Profile", systemImage: "person.crop.circle")
                 }

@@ -10,6 +10,7 @@ import Combine
 
 class TimerModel: ObservableObject {
     @Published var secondsElapsed: Int = 0
+    @Published var totalSecondsElapsed: Int = 0
     @Published var earnedMoneyFromThisBreak: Double = 0
     @Published var earnedToday: Double = 0
     @Published var earnedThisWeek: Double = 0
@@ -27,9 +28,16 @@ class TimerModel: ObservableObject {
     
     var hourlyRate: Double = 25.0
     
+    // MARK: Computed values
     var formattedTime: String {
         let minutes = secondsElapsed / 60
         let seconds = secondsElapsed % 60
+        return String(format: "%02dm %02ds", minutes, seconds)
+    }
+    
+    var formattedTotalTime: String {
+        let minutes = totalSecondsElapsed / 60
+        let seconds = totalSecondsElapsed % 60
         return String(format: "%02dm %02ds", minutes, seconds)
     }
     
@@ -45,6 +53,7 @@ class TimerModel: ObservableObject {
                 try? await Task.sleep(for: .seconds(1))
                 await MainActor.run {
                     self.secondsElapsed += 1
+                    self.earnedMoneyFromThisBreak = self.earnedSalary
                 }
             }
         }
@@ -59,6 +68,73 @@ class TimerModel: ObservableObject {
     func resetTimer() {
         stopTimer()
         secondsElapsed = 0
+        earnedMoneyFromThisBreak = 0
     }
     
+    func finishBreak() {
+        let earned = earnedMoneyFromThisBreak
+        earnedToday += earned
+        earnedThisWeek += earned
+        earnedThisMonth += earned
+        lifetimeEarnings += earned
+        
+        breaksTakenTotal += 1
+        breaksTakenToday += 1
+        totalSecondsElapsed += secondsElapsed
+        
+        resetTimer()
+    }
+    
+    // MARK: - Period resets
+    func resetDailyIfNeeded() {
+        let today = Calendar.current.startOfDay(for: Date())
+        let lastSaved = UserDefaults.standard.object(forKey: "lastDailyReset") as? Date ?? today
+        
+        if !Calendar.current.isDate(today, inSameDayAs: lastSaved) {
+            earnedToday = 0
+            breaksTakenToday = 0
+            UserDefaults.standard.set(today, forKey: "lastDailyReset")
+        }
+    }
+    
+    func resetWeeklyIfNeeded() {
+            let today = Date()
+            let lastSaved = UserDefaults.standard.object(forKey: "lastWeeklyReset") as? Date ?? today
+            
+            if !Calendar.current.isDate(today, equalTo: lastSaved, toGranularity: .weekOfYear) {
+                earnedThisWeek = 0
+                UserDefaults.standard.set(today, forKey: "lastWeeklyReset")
+            }
+        }
+        
+        func resetMonthlyIfNeeded() {
+            let today = Date()
+            let lastSaved = UserDefaults.standard.object(forKey: "lastMonthlyReset") as? Date ?? today
+            
+            if !Calendar.current.isDate(today, equalTo: lastSaved, toGranularity: .month) {
+                earnedThisMonth = 0
+                UserDefaults.standard.set(today, forKey: "lastMonthlyReset")
+            }
+        }
+    
+    // call when the app starts
+    func checkResets() {
+        resetDailyIfNeeded()
+        resetWeeklyIfNeeded()
+        resetMonthlyIfNeeded()
+    }
+        
+    // MARK: - Hard reset
+    func eraseAllData() {
+        resetTimer()
+        earnedToday = 0
+        earnedThisWeek = 0
+        earnedThisMonth = 0
+        lifetimeEarnings = 0
+        breaksTakenTotal = 0
+        minutesSpentOnBreak = 0
+        breaksTakenToday = 0
+        daySteak = 0
+        totalSecondsElapsed = 0
+    }
 }

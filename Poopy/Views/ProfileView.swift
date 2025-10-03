@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @ObservedObject var viewModel: TimerModel
+    @FocusState private var isEditingRate: Bool
+    
     var body: some View {
         VStack {
             VStack {
@@ -17,17 +20,26 @@ struct ProfileView: View {
                     .foregroundStyle(.white)
                     .padding(.bottom, 5)
                 
-                Text("$25.00")
+                TextField("Hourly Rate", value: $viewModel.hourlyRate, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
+                    .keyboardType(.decimalPad)
+                    .multilineTextAlignment(.center)
                     .font(.system(size: 32, weight: .bold))
                     .foregroundStyle(.green)
+                    .padding(.horizontal)
+                    .focused($isEditingRate)
                 
                 Button {
+                    if !isEditingRate {
+                        isEditingRate = true
+                    } else {
+                        isEditingRate = false
+                    }
                     
                 } label: {
                     HStack {
                         Image(systemName: "pencil")
                         
-                        Text("Edit Rate")
+                        Text(isEditingRate == false ? "Edit Rate" : "Save Rate")
                         
                     }
                     .font(.system(size: 20))
@@ -56,7 +68,7 @@ struct ProfileView: View {
                         Text("Total Earnings")
                             .foregroundStyle(.gray)
                         
-                        Text("$0.00")
+                        Text(viewModel.lifetimeEarnings, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                             .foregroundStyle(.green)
                     }
                     
@@ -65,22 +77,21 @@ struct ProfileView: View {
                     VStack {
                         Text("Total Time")
                             .foregroundStyle(.gray)
-
-                        Text("0h 0m")
+                        
+                        Text(viewModel.formattedTotalTime)
                             .foregroundStyle(.green)
                     }
                 }
                 .padding()
             }
             .frame(maxWidth: .infinity)
-            //.frame(width: 350)
             .padding()
             .frame(height: 120)
             .background(.containerGrey)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             
             Button {
-                
+                viewModel.eraseAllData()
             } label: {
                 HStack {
                     Image(systemName: "eraser")
@@ -92,7 +103,7 @@ struct ProfileView: View {
                 .frame(maxWidth: .infinity)
                 .foregroundStyle(.red)
                 .background(.containerGrey)
-                //.border(.red, width: 1) // stupid border gets fucky fucky by the rounded edges
+                //.border(.red, width: 1) // stupid border gets fucky wucky by the rounded edges
                 .clipShape(RoundedRectangle(cornerRadius: 50))
                 .padding()
             }
@@ -107,5 +118,5 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ProfileView()
+    ProfileView(viewModel: TimerModel())
 }
