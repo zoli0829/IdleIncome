@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var viewModel: TimerModel = TimerModel()
+    @StateObject private var viewModel: TimerViewModel = TimerViewModel()
     
     var body: some View {
         TabView {
@@ -28,6 +28,10 @@ struct HomeView: View {
                 }
         }
         .tint(.green)
+        .onAppear() {
+            viewModel.checkResets()
+            viewModel.loadStreak()
+        }
     }
 }
 

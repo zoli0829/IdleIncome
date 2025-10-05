@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @ObservedObject var viewModel: TimerModel
+    @ObservedObject var viewModel: TimerViewModel
     @FocusState private var isEditingRate: Bool
     
     var body: some View {
@@ -110,13 +110,13 @@ struct ProfileView: View {
             
             Spacer()
         }
-        .frame(width: .infinity)
-        .frame(maxHeight: .infinity)
+        //.frame(maxWidth: .infinity)
+        //.frame(maxHeight: .infinity)
         .padding()
         .background(.darkBackground)
     }
 }
 
 #Preview {
-    ProfileView(viewModel: TimerModel())
+    ProfileView(viewModel: TimerViewModel())
 }

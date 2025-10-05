@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimerView: View {
-    @ObservedObject var viewModel: TimerModel
+    @ObservedObject var viewModel: TimerViewModel
     
     var body: some View {
         VStack {
@@ -32,10 +32,11 @@ struct TimerView: View {
                 Button {
                     if viewModel.isRunning {
                         viewModel.stopTimer()
-                        // reset curren break timer and current earned money
+                        // reset current break timer and current earned money
                         viewModel.finishBreak()
                         // update lifetime earnings
                         // is called from resetCurrentBreakData()
+                        print(viewModel.lifetimeEarnings)
                     } else {
                         viewModel.startTimer()
                     }
@@ -119,11 +120,11 @@ struct TimerView: View {
             Spacer()
         }
         .padding()
-        .frame(width: .infinity)
+        //.frame(width: .infinity)
         .background(.darkBackground)
     }
 }
 
 #Preview {
-    TimerView(viewModel: TimerModel())
+    TimerView(viewModel: TimerViewModel())
 }

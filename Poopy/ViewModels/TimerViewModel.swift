@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class TimerModel: ObservableObject {
+class TimerViewModel: ObservableObject {
     @Published var secondsElapsed: Int = 0
     @Published var totalSecondsElapsed: Int = 0
     @Published var earnedMoneyFromThisBreak: Double = 0
@@ -52,6 +52,7 @@ class TimerModel: ObservableObject {
             while !Task.isCancelled {
                 try? await Task.sleep(for: .seconds(1))
                 await MainActor.run {
+                    guard self.isRunning else { return } // prevent late tick
                     self.secondsElapsed += 1
                     self.earnedMoneyFromThisBreak = self.earnedSalary
                 }
@@ -72,6 +73,7 @@ class TimerModel: ObservableObject {
     }
     
     func finishBreak() {
+        stopTimer()
         let earned = earnedMoneyFromThisBreak
         earnedToday += earned
         earnedThisWeek += earned
@@ -82,6 +84,7 @@ class TimerModel: ObservableObject {
         breaksTakenToday += 1
         totalSecondsElapsed += secondsElapsed
         
+        updateDayStreak()
         resetTimer()
     }
     
@@ -117,11 +120,45 @@ class TimerModel: ObservableObject {
             }
         }
     
-    // call when the app starts
+    // MARK: Day streak tracking
+    private func updateDayStreak() {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        
+        let lastBreakDate = UserDefaults.standard.object(forKey: "lastBreakDate") as? Date
+        let streak = UserDefaults.standard.integer(forKey: "dayStreak")
+        
+        if let lastDate = lastBreakDate {
+            if calendar.isDateInYesterday(lastDate) {
+                // took a break yesterday, increment streak
+                daySteak += 1
+            } else if calendar.isDate(lastDate, inSameDayAs: today) {
+                // already took a break today, don't change the streak
+                daySteak = streak
+            } else {
+                // missed a day or first break after a gap - reset streak
+                daySteak = 1
+            }
+        }
+        else {
+            // first ever break
+            daySteak = 1
+        }
+        
+        UserDefaults.standard.set(daySteak, forKey: "dayStreak")
+        UserDefaults.standard.set(today, forKey: "lastBreakDate")
+    }
+    
+    // call in the onAppear()
     func checkResets() {
         resetDailyIfNeeded()
         resetWeeklyIfNeeded()
         resetMonthlyIfNeeded()
+    }
+    
+    // call in the onAppear()
+    func loadStreak() {
+        daySteak = UserDefaults.standard.integer(forKey: "dayStreak")
     }
         
     // MARK: - Hard reset
