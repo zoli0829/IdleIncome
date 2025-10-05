@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct PoopyApp: App {
+struct BreakApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView()

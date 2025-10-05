@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		C27C85A82E8D8245009B8544 /* Poopy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poopy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C27C85A82E8D8245009B8544 /* Break App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Break App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		C27C85AA2E8D8245009B8544 /* Poopy */ = {
+		C27C85AA2E8D8245009B8544 /* BreakApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Poopy;
+			path = BreakApp;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,7 +32,7 @@
 		C27C859F2E8D8245009B8544 = {
 			isa = PBXGroup;
 			children = (
-				C27C85AA2E8D8245009B8544 /* Poopy */,
+				C27C85AA2E8D8245009B8544 /* BreakApp */,
 				C27C85A92E8D8245009B8544 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -40,7 +40,7 @@
 		C27C85A92E8D8245009B8544 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C27C85A82E8D8245009B8544 /* Poopy.app */,
+				C27C85A82E8D8245009B8544 /* Break App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C27C85A72E8D8245009B8544 /* Poopy */ = {
+		C27C85A72E8D8245009B8544 /* Break App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C27C85B32E8D8246009B8544 /* Build configuration list for PBXNativeTarget "Poopy" */;
+			buildConfigurationList = C27C85B32E8D8246009B8544 /* Build configuration list for PBXNativeTarget "Break App" */;
 			buildPhases = (
 				C27C85A42E8D8245009B8544 /* Sources */,
 				C27C85A52E8D8245009B8544 /* Frameworks */,
@@ -61,13 +61,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				C27C85AA2E8D8245009B8544 /* Poopy */,
+				C27C85AA2E8D8245009B8544 /* BreakApp */,
 			);
-			name = Poopy;
+			name = "Break App";
 			packageProductDependencies = (
 			);
 			productName = Poopy;
-			productReference = C27C85A82E8D8245009B8544 /* Poopy.app */;
+			productReference = C27C85A82E8D8245009B8544 /* Break App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C27C85A32E8D8245009B8544 /* Build configuration list for PBXProject "Poopy" */;
+			buildConfigurationList = C27C85A32E8D8245009B8544 /* Build configuration list for PBXProject "Break App" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C27C85A72E8D8245009B8544 /* Poopy */,
+				C27C85A72E8D8245009B8544 /* Break App */,
 			);
 		};
 /* End PBXProject section */
@@ -313,7 +313,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C27C85A32E8D8245009B8544 /* Build configuration list for PBXProject "Poopy" */ = {
+		C27C85A32E8D8245009B8544 /* Build configuration list for PBXProject "Break App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C27C85B12E8D8246009B8544 /* Debug */,
@@ -322,7 +322,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C27C85B32E8D8246009B8544 /* Build configuration list for PBXNativeTarget "Poopy" */ = {
+		C27C85B32E8D8246009B8544 /* Build configuration list for PBXNativeTarget "Break App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C27C85B42E8D8246009B8544 /* Debug */,
