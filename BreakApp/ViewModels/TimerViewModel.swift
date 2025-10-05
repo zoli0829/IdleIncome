@@ -67,14 +67,14 @@ class TimerViewModel: ObservableObject {
     }
     
     func resetTimer() {
-        stopTimer()
         secondsElapsed = 0
         earnedMoneyFromThisBreak = 0
     }
     
     func finishBreak() {
         stopTimer()
-        let earned = earnedMoneyFromThisBreak
+        
+        let earned = earnedSalary
         earnedToday += earned
         earnedThisWeek += earned
         earnedThisMonth += earned
@@ -83,8 +83,10 @@ class TimerViewModel: ObservableObject {
         breaksTakenTotal += 1
         breaksTakenToday += 1
         totalSecondsElapsed += secondsElapsed
+        timeSpentOnBreaksTotal += secondsElapsed / 60
         
         updateDayStreak()
+        
         resetTimer()
     }
     

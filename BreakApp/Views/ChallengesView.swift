@@ -13,17 +13,20 @@ struct ChallengesView: View {
     var body: some View {
         VStack {
             ScrollView{
-                AchievementDetailView(viewModel: .init(achievement: Achievement(
-                    title: "Break Master",
-                    description: "Take 50 Breaks",
-                    maxProgress: 50, color: .yellow,
-                    lockedImage: "seal",
-                    unlockedImage: "seal.fill",
-                    progressText: "breaks"),
-                    currentProgress: viewModel.breaksTakenTotal
-                ))
+                AchievementDetailView(
+                    achievement: Achievement(
+                        title: "Break Master",
+                        description: "Take 50 breaks",
+                        maxProgress: 50,
+                        color: .yellow,
+                        lockedImage: "seal",
+                        unlockedImage: "seal.fill",
+                        progressText: "breaks"
+                    ),
+                    currentProgress: $viewModel.breaksTakenTotal
+                )
                 
-                AchievementDetailView(viewModel: .init(
+                AchievementDetailView(
                         achievement: Achievement(
                             title: "Break Lord",
                             description: "Spend 10 hours not working",
@@ -33,10 +36,10 @@ struct ChallengesView: View {
                             unlockedImage: "crown.fill",
                             progressText: "minutes"
                         ),
-                        currentProgress: viewModel.timeSpentOnBreaksTotal
-                    ))
+                        currentProgress: $viewModel.timeSpentOnBreaksTotal
+                    )
                 
-                AchievementDetailView(viewModel: .init(
+                AchievementDetailView(
                         achievement: Achievement(
                             title: "Pocket Money Fund",
                             description: "Earn $100 from taking breaks",
@@ -46,10 +49,16 @@ struct ChallengesView: View {
                             unlockedImage: "dollarsign.circle.fill",
                             progressText: "€ earned"
                         ),
-                        currentProgress: Int(viewModel.lifetimeEarnings)
-                    ))
+                        // This creates a read-only integer binding to viewModel.lifetimeEarnings.
+                        //  I can use it in a UI control like a ProgressView or Slider, but moving the slider won’t change the underlying data because set does nothing.
+                        //  The binding lets SwiftUI observe changes in viewModel.lifetimeEarnings if it’s a @Published property.
+                        currentProgress: Binding<Int>(
+                                get: { Int(viewModel.lifetimeEarnings) },
+                                set: { _ in }
+                            )
+                        )
                 
-                AchievementDetailView(viewModel: .init(
+                AchievementDetailView(
                     achievement: Achievement(
                         title: "Triple Threat",
                         description: "Take 3 breaks in one day",
@@ -59,10 +68,13 @@ struct ChallengesView: View {
                         unlockedImage: "dollarsign.circle.fill",
                         progressText: "€ earned"
                     ),
-                    currentProgress: Int(viewModel.lifetimeEarnings)
-                ))
+                    currentProgress: Binding<Int>(
+                        get: { Int(viewModel.lifetimeEarnings) },
+                        set: { _ in }
+                    )
+                )
                 
-                AchievementDetailView(viewModel: .init(
+                AchievementDetailView(
                     achievement: Achievement(
                         title: "Regular Royal",
                         description: "Take a break 5 days in a row",
@@ -72,10 +84,13 @@ struct ChallengesView: View {
                         unlockedImage: "calendar.circle.fill",
                         progressText: "day streak"
                     ),
-                    currentProgress: Int(viewModel.lifetimeEarnings)
-                ))
+                    currentProgress: Binding<Int>(
+                        get: { Int(viewModel.lifetimeEarnings) },
+                        set: { _ in }
+                    )
+                )
                 
-                AchievementDetailView(viewModel: .init(
+                AchievementDetailView(
                     achievement: Achievement(
                         title: "Break Champion",
                         description: "Earn $500 from breaks",
@@ -85,9 +100,13 @@ struct ChallengesView: View {
                         unlockedImage: "dollarsign.square.fill",
                         progressText: "€ earned"
                     ),
-                    currentProgress: Int(viewModel.lifetimeEarnings)))
+                    currentProgress: Binding<Int>(
+                        get: { Int(viewModel.lifetimeEarnings) },
+                        set: { _ in }
+                    )
+                )
                 
-                AchievementDetailView(viewModel: .init(
+                AchievementDetailView(
                     achievement: Achievement(
                         title: "Break Prodigy",
                         description: "Spend 24 hours on break",
@@ -97,10 +116,10 @@ struct ChallengesView: View {
                         unlockedImage: "clock.fill",
                         progressText: "minutes"
                     ),
-                    currentProgress: Int(viewModel.timeSpentOnBreaksTotal)
-                ))
+                    currentProgress: $viewModel.timeSpentOnBreaksTotal
+                )
                 
-                AchievementDetailView(viewModel: .init(
+                AchievementDetailView(
                     achievement: Achievement(
                         title: "Break Professional",
                         description: "Take 100 breaks",
@@ -109,9 +128,10 @@ struct ChallengesView: View {
                         unlockedImage: "briefcase.fill",
                         progressText: "breaks"
                     ),
-                    currentProgress: Int(viewModel.breaksTakenTotal)))
+                    currentProgress: $viewModel.breaksTakenTotal
+                )
                 
-                AchievementDetailView(viewModel: .init(
+                AchievementDetailView(
                     achievement: Achievement(
                         title: "Super Chiller",
                         description: "Take 5 breaks in one day",
@@ -121,9 +141,10 @@ struct ChallengesView: View {
                         unlockedImage: "sparkles.square.filled.on.square",
                         progressText: "breaks today"
                     ),
-                    currentProgress: Int(viewModel.breaksTakenToday)))
+                    currentProgress: $viewModel.breaksTakenToday
+                )
                                 
-                AchievementDetailView(viewModel: .init(
+                AchievementDetailView(
                     achievement: Achievement(
                         title: "Break Tycoon",
                         description: "Earn $1000 from taking breaks",
@@ -133,9 +154,13 @@ struct ChallengesView: View {
                         unlockedImage: "crown.fill",
                         progressText: "€ earned"
                     ),
-                    currentProgress: Int(viewModel.lifetimeEarnings)))
+                    currentProgress: Binding<Int>(
+                        get: { Int(viewModel.lifetimeEarnings) },
+                        set: { _ in }
+                    )
+                )
                 
-                AchievementDetailView(viewModel: .init(
+                AchievementDetailView(
                     achievement: Achievement(
                         title: "Chill Warrior",
                         description: "Take a break every day for 7 days",
@@ -145,9 +170,10 @@ struct ChallengesView: View {
                         unlockedImage: "shield.fill",
                         progressText: "day streak"
                     ),
-                    currentProgress: Int(viewModel.daySteak)))
+                    currentProgress: $viewModel.daySteak
+                )
                 
-                AchievementDetailView(viewModel: .init(
+                AchievementDetailView(
                     achievement: Achievement(
                         title: "Chill Millionaire",
                         description: "Earn $2000 from breaks",
@@ -157,9 +183,13 @@ struct ChallengesView: View {
                         unlockedImage: "dollarsign.circle.fill",
                         progressText: "€ earned"
                     ),
-                    currentProgress: Int(viewModel.lifetimeEarnings)))
+                    currentProgress: Binding<Int>(
+                        get: { Int(viewModel.lifetimeEarnings) },
+                        set: { _ in } 
+                    )
+                )
                 
-                AchievementDetailView(viewModel: .init(
+                AchievementDetailView(
                     achievement: Achievement(
                         title: "Legendary Office Worker",
                         description: "Take 500 breaks",
@@ -168,9 +198,10 @@ struct ChallengesView: View {
                         unlockedImage: "true.fill",
                         progressText: "breaks"
                     ),
-                    currentProgress: Int(viewModel.breaksTakenTotal)))
+                    currentProgress: $viewModel.breaksTakenTotal
+                )
                 
-                AchievementDetailView(viewModel: .init(
+                AchievementDetailView(
                     achievement: Achievement(
                         title: "Break Marathon",
                         description: "Spend 100 hours on break",
@@ -180,9 +211,10 @@ struct ChallengesView: View {
                         unlockedImage: "hourglass.cirlce.fill",
                         progressText: "minutes"
                     ),
-                    currentProgress: Int(viewModel.timeSpentOnBreaksTotal)))
+                    currentProgress: $viewModel.timeSpentOnBreaksTotal
+                )
                 
-                AchievementDetailView(viewModel: .init(
+                AchievementDetailView(
                     achievement: Achievement(
                         title: "Daily Chiller",
                         description: "Take 10 breaks in one day",
@@ -192,7 +224,8 @@ struct ChallengesView: View {
                         unlockedImage: "10.square.fill",
                         progressText: "breaks today"
                     ),
-                    currentProgress: Int(viewModel.breaksTakenToday)))
+                    currentProgress: $viewModel.breaksTakenToday
+                )
             }
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)

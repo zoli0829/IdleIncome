@@ -8,28 +8,37 @@
 import SwiftUI
 
 struct AchievementDetailView: View {
-    @StateObject var viewModel: AchievementDetailViewModel
+    let achievement: Achievement
+    @Binding var currentProgress: Int
+    
+    var achievementProgress: Float {
+        Float(currentProgress) / Float(achievement.maxProgress)
+    }
+    
+    var isAchievementUnlocked: Bool {
+        currentProgress >= achievement.maxProgress
+    }
     
     var body: some View {
         HStack(spacing: 25) {
-            Image(systemName: viewModel.isAchievementUnlocked ? viewModel.achievement.unlockedImage : viewModel.achievement.lockedImage)
+            Image(systemName: isAchievementUnlocked ? achievement.unlockedImage : achievement.lockedImage)
                 .resizable()
                 .frame(width: 25, height: 25)
-                .foregroundStyle(viewModel.achievement.color)
+                .foregroundStyle(achievement.color)
                 
             VStack {
-                Text(viewModel.achievement.title)
+                Text(achievement.title)
                     .font(.system(size: 24, weight: .semibold))
                     .foregroundStyle(.white)
                 
-                Text(viewModel.achievement.description)
+                Text(achievement.description)
                     .foregroundStyle(.gray)
                 
-                ProgressView(value: viewModel.achievementProgress)
+                ProgressView(value: achievementProgress)
                     .sliderThumbVisibility(.hidden)
                     .tint(.green)
                 
-                Text("\(viewModel.currentProgress)/\(viewModel.achievement.maxProgress) \(viewModel.achievement.progressText)")
+                Text("\(currentProgress)/\(achievement.maxProgress) \(achievement.progressText)")
                     .foregroundStyle(.gray)
                 
             }
@@ -42,6 +51,6 @@ struct AchievementDetailView: View {
     }
 }
 
-#Preview {
-    AchievementDetailView(viewModel: AchievementDetailViewModel(achievement: Achievement(title: "Test Title", description: "Test Description", maxProgress: 500, color: .green, lockedImage: "person", unlockedImage: "person.fill", progressText: " dollars"), currentProgress: 1))
-}
+//#Preview {
+//    AchievementDetailView(achievement: Achievement(title: "Title", description: "Desc", maxProgress: 500, color: .green, lockedImage: "person", unlockedImage: "person.fill", progressText: "breaks taken"), currentProgress: )
+//}
