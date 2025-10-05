@@ -32,11 +32,7 @@ struct TimerView: View {
                 Button {
                     if viewModel.isRunning {
                         viewModel.stopTimer()
-                        // reset current break timer and current earned money
                         viewModel.finishBreak()
-                        // update lifetime earnings
-                        // is called from resetCurrentBreakData()
-                        print(viewModel.lifetimeEarnings)
                     } else {
                         viewModel.startTimer()
                     }

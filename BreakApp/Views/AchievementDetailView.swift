@@ -51,6 +51,7 @@ struct AchievementDetailView: View {
     }
 }
 
+// TODO: Need to figure out a way to make the preview work
 //#Preview {
 //    AchievementDetailView(achievement: Achievement(title: "Title", description: "Desc", maxProgress: 500, color: .green, lockedImage: "person", unlockedImage: "person.fill", progressText: "breaks taken"), currentProgress: )
 //}
