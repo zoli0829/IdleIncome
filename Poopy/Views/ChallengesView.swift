@@ -13,37 +13,88 @@ struct ChallengesView: View {
     var body: some View {
         VStack {
             ScrollView{
-                AchievementDetailView(achievemenTitle: "Break Master", achievementDescription: "Take 50 breaks", maxProgress: 50, currentProgress: viewModel.breaksTakenTotal, color: .yellow, achievementImage: "rosette", achievementTextToDisplay: "breaks")
+                AchievementDetailView(viewModel: .init(achievement: Achievement(
+                    title: "Break Master",
+                    description: "Take 50 Breaks",
+                    maxProgress: 50, color: .yellow,
+                    lockedImage: "seal",
+                    unlockedImage: "seal.fill",
+                    progressText: "breaks"),
+                    currentProgress: viewModel.breaksTakenTotal
+                ))
                 
-                AchievementDetailView(achievemenTitle: "Break Lord", achievementDescription: "Spend 10 hours not working", maxProgress: 600, currentProgress: viewModel.timeSpentOnBreaksTotal, color: .yellow, achievementImage: "crown.fill", achievementTextToDisplay: "minutes")
                 
-                AchievementDetailView(achievemenTitle: "Pocket Money Fund", achievementDescription: "Earn 100$ from taking breaks", maxProgress: 100, currentProgress: Int(viewModel.lifetimeEarnings), color: .green, achievementImage: "dollarsign.circle.fill", achievementTextToDisplay: "dollars")
+                AchievementDetailView(viewModel: .init(
+                        achievement: Achievement(
+                            title: "Break Lord",
+                            description: "Spend 10 hours not working",
+                            maxProgress: 600,
+                            color: .yellow,
+                            lockedImage: "crown",
+                            unlockedImage: "crown.fill",
+                            progressText: "minutes"
+                        ),
+                        currentProgress: viewModel.timeSpentOnBreaksTotal
+                    ))
                 
-                AchievementDetailView(achievemenTitle: "Triple Threat", achievementDescription: "Take 3 breaks in one day", maxProgress: 3, currentProgress: viewModel.breaksTakenToday, color: .blue, achievementImage: "3.square.fill", achievementTextToDisplay: "breaks today")
+                AchievementDetailView(viewModel: .init(
+                        achievement: Achievement(
+                            title: "Pocket Money Fund",
+                            description: "Earn $100 from taking breaks",
+                            maxProgress: 100,
+                            color: .green,
+                            lockedImage: "dollarsign.circle",
+                            unlockedImage: "dollarsign.circle.fill",
+                            progressText: "dollars"
+                        ),
+                        currentProgress: Int(viewModel.lifetimeEarnings)
+                    ))
                 
-                // TODO: need to introduce a streak var
-                AchievementDetailView(achievemenTitle: "Regular Royal", achievementDescription: "Take a break 5 days in a row", maxProgress: 5, currentProgress: 0, color: .blue, achievementImage: "calendar.badge.clock", achievementTextToDisplay: "day streak")
+                AchievementDetailView(viewModel: .init(
+                    achievement: Achievement(
+                        title: "Triple Threat",
+                        description: "Take 3 breaks in one day",
+                        maxProgress: 100,
+                        color: .green,
+                        lockedImage: "dollarsign.circle",
+                        unlockedImage: "dollarsign.circle.fill",
+                        progressText: "earned"
+                    ),
+                    currentProgress: Int(viewModel.lifetimeEarnings)
+                ))
                 
-                AchievementDetailView(achievemenTitle: "Break Champion", achievementDescription: "Earn 500$ from taking breaks", maxProgress: 500, currentProgress: Int(viewModel.lifetimeEarnings), color: .green, achievementImage: "dollarsign.square.fill", achievementTextToDisplay: "dollars")
+                AchievementDetailView(viewModel: .init(
+                    achievement: Achievement(
+                        title: "Regular Royal",
+                        description: "Take a break 5 days in a row",
+                        maxProgress: 5,
+                        color: .blue,
+                        lockedImage: "calendar.circle",
+                        unlockedImage: "calendar.circle.fill",
+                        progressText: "day streak"
+                    ),
+                    currentProgress: Int(viewModel.lifetimeEarnings)
+                ))
                 
-                AchievementDetailView(achievemenTitle: "Break Marathon", achievementDescription: "Spend 24 hours on breaks", maxProgress: 1440, currentProgress: viewModel.timeSpentOnBreaksTotal, color: .blue, achievementImage: "clock.fill", achievementTextToDisplay: "minutes")
+                AchievementDetailView(viewModel: .init(achievement: Achievement(title: "Break Champion", description: "Earn $500 from breaks", maxProgress: 500, color: .green, lockedImage: "dollarsign.square", unlockedImage: "dollarsign.square.fill", progressText: "money"), currentProgress: Int(viewModel.lifetimeEarnings)))
                 
-                AchievementDetailView(achievemenTitle: "Break Professional", achievementDescription: "Take 100 breaks", maxProgress: 100, currentProgress: viewModel.breaksTakenTotal, color: .green, achievementImage: "briefcase.fill", achievementTextToDisplay: "breaks")
+                AchievementDetailView(viewModel: .init(achievement: Achievement(title: "Break Prodigy", description: "Spend 24 hours on break", maxProgress: 1440, color: .blue, lockedImage: "clock", unlockedImage: "clock.fill", progressText: "minutes"), currentProgress: Int(viewModel.timeSpentOnBreaksTotal)))
                 
-                AchievementDetailView(achievemenTitle: "Super Chiller", achievementDescription: "Take 5 breaks in one day", maxProgress: 5, currentProgress: viewModel.breaksTakenToday, color: .yellow, achievementImage: "sparkles", achievementTextToDisplay: "breaks today")
+                AchievementDetailView(viewModel: .init(achievement: Achievement(title: "Break Professional", description: "Take 100 breaks", maxProgress: 100, color: .green, lockedImage: "briefcase", unlockedImage: "briefcase.fill", progressText: "breaks"), currentProgress: Int(viewModel.breaksTakenTotal)))
                 
-                AchievementDetailView(achievemenTitle: "Break Tycoon", achievementDescription: "Earn $1000 from taking breaks", maxProgress: 1000, currentProgress: Int(viewModel.lifetimeEarnings), color: .yellow, achievementImage: "crown.fill", achievementTextToDisplay: "dollars")
+                AchievementDetailView(viewModel: .init(achievement: Achievement(title: "Super Chiller", description: "Take 5 breaks in one day", maxProgress: 5, color: .yellow, lockedImage: "sparkles.rectangle.stack", unlockedImage: "sparkles.square.filled.on.square", progressText: "breaks today"), currentProgress: Int(viewModel.breaksTakenToday)))
+                                
+                AchievementDetailView(viewModel: .init(achievement: Achievement(title: "Break Tycoon", description: "Earn $1000 from taking breaks", maxProgress: 1000, color: .green, lockedImage: "crown", unlockedImage: "crown.fill", progressText: "money"), currentProgress: Int(viewModel.lifetimeEarnings)))
                 
-                AchievementDetailView(achievemenTitle: "Chill Warrior", achievementDescription: "Take a break every day for 7 days", maxProgress: 7, currentProgress: 0, color: .yellow, achievementImage: "shield.fill", achievementTextToDisplay: "day streak")
+                AchievementDetailView(viewModel: .init(achievement: Achievement(title: "Chill Warrior", description: "Take a break every day for 7 days", maxProgress: 7, color: .yellow, lockedImage: "shield", unlockedImage: "shield.fill", progressText: "day streak"), currentProgress: Int(viewModel.daySteak)))
                 
-                AchievementDetailView(achievemenTitle: "Chill Millionaire", achievementDescription: "Earn $2000 from taking breaks", maxProgress: 2000, currentProgress: Int(viewModel.lifetimeEarnings), color: .green, achievementImage: "dollarsign.circle.fill", achievementTextToDisplay: "dollars")
+                AchievementDetailView(viewModel: .init(achievement: Achievement(title: "Chill Millionaire", description: "Earn $2000 from breaks", maxProgress: 2000, color: .green, lockedImage: "dollarsign.circle", unlockedImage: "dollarsign.circle.fill", progressText: "money"), currentProgress: Int(viewModel.lifetimeEarnings)))
                 
-                AchievementDetailView(achievemenTitle: "Legendary Office Worker", achievementDescription: "Take 500 breaks", maxProgress: 500, currentProgress: viewModel.breaksTakenTotal, color: .yellow, achievementImage: "trophy.fill", achievementTextToDisplay: "breaks")
+                AchievementDetailView(viewModel: .init(achievement: Achievement(title: "Legendary Office Worker", description: "Take 500 breaks", maxProgress: 500, color: .yellow, lockedImage: "trophy", unlockedImage: "true.fill", progressText: "breaks"), currentProgress: Int(viewModel.breaksTakenTotal)))
                 
-                // this might needs work
-                AchievementDetailView(achievemenTitle: "Break Marathon", achievementDescription: "Spend 100 hours on break", maxProgress: 6000, currentProgress: viewModel.timeSpentOnBreaksTotal, color: .blue, achievementImage: "hourglass", achievementTextToDisplay: "minutes")
+                AchievementDetailView(viewModel: .init(achievement: Achievement(title: "Break Marathon", description: "Spend 100 hours on break", maxProgress: 500, color: .blue, lockedImage: "hourglass.circle", unlockedImage: "hourglass.cirlce.fill", progressText: "minutes"), currentProgress: Int(viewModel.timeSpentOnBreaksTotal)))
                 
-                AchievementDetailView(achievemenTitle: "Daily Chiller", achievementDescription: "Take 10 breaks in one day", maxProgress: 10, currentProgress: viewModel.breaksTakenToday, color: .blue, achievementImage: "10.square.fill", achievementTextToDisplay: "breaks today")
+                AchievementDetailView(viewModel: .init(achievement: Achievement(title: "Daily Chiller", description: "Take 10 breaks in one day", maxProgress: 10, color: .blue, lockedImage: "10.square", unlockedImage: "10.square.fill", progressText: "breaks today"), currentProgress: Int(viewModel.breaksTakenToday)))
             }
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -8,38 +8,28 @@
 import SwiftUI
 
 struct AchievementDetailView: View {
-    let achievemenTitle: String
-    let achievementDescription: String
-    let maxProgress: Int
-    var currentProgress: Int
-    let color: Color
-    let achievementImage: String
-    let achievementTextToDisplay: String
-    
-    var achievementProgress: Float {
-        Float(currentProgress) / Float(maxProgress)
-    }
+    @StateObject var viewModel: AchievementDetailViewModel
     
     var body: some View {
         HStack(spacing: 25) {
-            Image(systemName: achievementImage)
+            Image(systemName: viewModel.isAchievementUnlocked ? viewModel.achievement.unlockedImage : viewModel.achievement.lockedImage)
                 .resizable()
                 .frame(width: 25, height: 25)
-                .foregroundStyle(color)
+                .foregroundStyle(viewModel.achievement.color)
                 
             VStack {
-                Text(achievemenTitle)
+                Text(viewModel.achievement.title)
                     .font(.system(size: 24, weight: .semibold))
                     .foregroundStyle(.white)
                 
-                Text(achievementDescription)
+                Text(viewModel.achievement.description)
                     .foregroundStyle(.gray)
                 
-                ProgressView(value: achievementProgress)
+                ProgressView(value: viewModel.achievementProgress)
                     .sliderThumbVisibility(.hidden)
                     .tint(.green)
                 
-                Text("\(currentProgress)/\(maxProgress) \(achievementTextToDisplay)")
+                Text("\(viewModel.currentProgress)/\(viewModel.achievement.maxProgress) \(viewModel.achievement.progressText)")
                     .foregroundStyle(.gray)
                 
             }
@@ -53,5 +43,5 @@ struct AchievementDetailView: View {
 }
 
 #Preview {
-    AchievementDetailView(achievemenTitle: "Title", achievementDescription: "Description", maxProgress: 50, currentProgress: 1, color: .yellow, achievementImage: "person.fill", achievementTextToDisplay: "breaks taken")
+    AchievementDetailView(viewModel: AchievementDetailViewModel(achievement: Achievement(title: "Test Title", description: "Test Description", maxProgress: 500, color: .green, lockedImage: "person", unlockedImage: "person.fill", progressText: " dollars"), currentProgress: 1))
 }
