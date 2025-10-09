@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @Environment(\.scenePhase) private var scenePhase
     @StateObject private var viewModel: TimerViewModel = TimerViewModel()
     
     var body: some View {
@@ -32,6 +33,16 @@ struct HomeView: View {
             viewModel.checkResets()
             viewModel.loadStreak()
         }
+        .onChange(of: scenePhase) { newPhase in
+                    switch newPhase {
+                    case .background:
+                        viewModel.appMovedToBackground()
+                    case .active:
+                        viewModel.appMovedToForeground()
+                    default:
+                        break
+                    }
+                }
     }
 }
 

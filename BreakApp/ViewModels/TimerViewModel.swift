@@ -25,6 +25,9 @@ class TimerViewModel: ObservableObject {
     
     @Published var isRunning = false
     private var task: Task<Void, Never>?
+    // background calc properties
+    private var backgroundEnteredDate: Date?
+    private var wasRunningBeforeBackground = false
     
     var hourlyRate: Double = 25.0
     
@@ -44,7 +47,31 @@ class TimerViewModel: ObservableObject {
     var earnedSalary: Double {
         (Double(secondsElapsed) / 3600.0) * hourlyRate
     }
+     // MARK: Background and foreground logic
+    func appMovedToBackground() {
+        wasRunningBeforeBackground = isRunning
+        if isRunning {
+            backgroundEnteredDate = Date()
+            // Suspend the timer task to avoid double counting
+            stopTimer()
+        }
+    }
     
+    func appMovedToForeground() {
+        guard let backgroundDate = backgroundEnteredDate else { return }
+        let secondsPassed = Int(Date().timeIntervalSince(backgroundDate))
+        
+        if wasRunningBeforeBackground {
+                secondsElapsed += secondsPassed
+                earnedMoneyFromThisBreak = earnedSalary
+                startTimer()
+            }
+
+            backgroundEnteredDate = nil
+            wasRunningBeforeBackground = false
+    }
+    
+    // MARK: Timer functions
     func startTimer() {
         guard !isRunning else { return }
         isRunning = true
