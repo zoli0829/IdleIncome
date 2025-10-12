@@ -17,14 +17,14 @@ struct ProfileView: View {
                 Text("Hourly Rate")
                     .font(.title)
                     .bold()
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.aquamarine)
                     .padding(.bottom, 5)
                 
                 TextField("Hourly Rate", value: $viewModel.hourlyRate, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                     .keyboardType(.decimalPad)
                     .multilineTextAlignment(.center)
                     .font(.system(size: 32, weight: .bold))
-                    .foregroundStyle(.green)
+                    .foregroundStyle(.brightTeal)
                     .padding(.horizontal)
                     .focused($isEditingRate)
                 
@@ -49,7 +49,7 @@ struct ProfileView: View {
                     //.frame(width: 150, height: 50)
                     .frame(height: 50)
                     .foregroundStyle(.black)
-                    .background(.green)
+                    .background(.brightTeal)
                     .clipShape(RoundedRectangle(cornerRadius: 50))
                 }
                 .buttonStyle(.plain)
@@ -63,25 +63,25 @@ struct ProfileView: View {
             VStack {
                 Text("All Time Stats")
                     .font(.system(size: 24))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.aquamarine)
                 
                 HStack {
                     VStack {
                         Text("Total Earnings")
-                            .foregroundStyle(.gray)
+                            .foregroundStyle(.aquamarine)
                         
                         Text(viewModel.lifetimeEarnings, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
-                            .foregroundStyle(.green)
+                            .foregroundStyle(.brightTeal)
                     }
                     
                     Spacer()
                     
                     VStack {
                         Text("Total Time")
-                            .foregroundStyle(.gray)
+                            .foregroundStyle(.aquamarine)
                         
                         Text(viewModel.formattedTotalTime)
-                            .foregroundStyle(.green)
+                            .foregroundStyle(.brightTeal)
                     }
                 }
                 .padding()

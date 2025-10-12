@@ -49,6 +49,7 @@ struct ChallengesView: View {
                             unlockedImage: "dollarsign.circle.fill",
                             progressText: "€ earned"
                         ),
+                        // This is some GPT magic
                         // This creates a read-only integer binding to viewModel.lifetimeEarnings.
                         //  I can use it in a UI control like a ProgressView or Slider, but moving the slider won’t change the underlying data because set does nothing.
                         //  The binding lets SwiftUI observe changes in viewModel.lifetimeEarnings if it’s a @Published property.

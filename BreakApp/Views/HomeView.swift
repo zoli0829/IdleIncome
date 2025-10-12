@@ -28,7 +28,7 @@ struct HomeView: View {
                     Label("Profile", systemImage: "person.crop.circle")
                 }
         }
-        .tint(.green)
+        .tint(.brightTeal)
         .onAppear() {
             viewModel.checkResets()
             viewModel.loadStreak()

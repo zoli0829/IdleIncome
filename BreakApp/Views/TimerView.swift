@@ -16,17 +16,17 @@ struct TimerView: View {
                 Text("Current Break")
                     .font(.title)
                     .bold()
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.aquamarine)
                     .padding(.bottom, 5)
                 
                 Text(viewModel.formattedTime)
                     .font(.system(size: 32, weight: .bold))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.aquamarine)
                     .padding(.bottom, 5)
                 
                 Text(viewModel.earnedSalary, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                     .font(.system(size: 24, weight: .bold))
-                    .foregroundStyle(.green)
+                    .foregroundStyle(.brightTeal)
                     .padding(.bottom, 10)
                 
                 Button {
@@ -43,7 +43,7 @@ struct TimerView: View {
                         .frame(height: 50)
                         .frame(maxWidth: .infinity)
                         .foregroundStyle(.black)
-                        .background(.green)
+                        .background(.brightTeal)
                         .clipShape(RoundedRectangle(cornerRadius: 50))
                         .padding(.horizontal)
                 }
@@ -56,10 +56,10 @@ struct TimerView: View {
             HStack {
                 VStack {
                     Text("Today")
-                        .foregroundStyle(.gray)
+                        .foregroundStyle(.aquamarine)
                     
                     Text(viewModel.earnedToday, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
-                        .foregroundStyle(.green)
+                        .foregroundStyle(.brightTeal)
                 }
                 .frame(maxWidth: .infinity)
                 .frame(height: 75)
@@ -68,10 +68,10 @@ struct TimerView: View {
                 
                 VStack {
                     Text("This Week")
-                        .foregroundStyle(.gray)
+                        .foregroundStyle(.aquamarine)
                     
                     Text(viewModel.earnedThisWeek, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
-                        .foregroundStyle(.green)
+                        .foregroundStyle(.brightTeal)
                 }
                 .frame(maxWidth: .infinity)
                 .frame(height: 75)
@@ -80,10 +80,10 @@ struct TimerView: View {
                 
                 VStack {
                     Text("This Month")
-                        .foregroundStyle(.gray)
+                        .foregroundStyle(.aquamarine)
                     
                     Text(viewModel.earnedThisMonth, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
-                        .foregroundStyle(.green)
+                        .foregroundStyle(.brightTeal)
                 }
                 .frame(maxWidth: .infinity)
                 .frame(height: 75)
@@ -96,16 +96,16 @@ struct TimerView: View {
             VStack() {
                 HStack {
                     Image(systemName: "line.diagonal.arrow")
-                        .foregroundStyle(.green)
+                        .foregroundStyle(.brightTeal)
                     
                     Text("Lifetime Earnings")
                         .font(.system(size: 24))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.aquamarine)
                 }
                 
                 Text(viewModel.lifetimeEarnings, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                     .font(.system(size: 32, weight: .bold))
-                    .foregroundStyle(.green)
+                    .foregroundStyle(.brightTeal)
             }
             .padding()
             .frame(height: 100)
@@ -116,7 +116,6 @@ struct TimerView: View {
             Spacer()
         }
         .padding()
-        //.frame(width: .infinity)
         .background(.darkBackground)
     }
 }

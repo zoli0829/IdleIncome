@@ -12,7 +12,8 @@ struct AchievementDetailView: View {
     @Binding var currentProgress: Int
     
     var achievementProgress: Float {
-        Float(currentProgress) / Float(achievement.maxProgress)
+        let progress = Float(currentProgress) / Float(achievement.maxProgress)
+        return min(max(progress, 0), 1)
     }
     
     var isAchievementUnlocked: Bool {
@@ -29,17 +30,17 @@ struct AchievementDetailView: View {
             VStack {
                 Text(achievement.title)
                     .font(.system(size: 24, weight: .semibold))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.brightTeal)
                 
                 Text(achievement.description)
-                    .foregroundStyle(.gray)
+                    .foregroundStyle(.aquamarine)
                 
                 ProgressView(value: achievementProgress)
                     .sliderThumbVisibility(.hidden)
-                    .tint(.green)
+                    .tint(.brightTeal)
                 
                 Text("\(currentProgress)/\(achievement.maxProgress) \(achievement.progressText)")
-                    .foregroundStyle(.gray)
+                    .foregroundStyle(.aquamarine)
                 
             }
         }
@@ -48,13 +49,13 @@ struct AchievementDetailView: View {
         .frame(maxWidth: .infinity)
         .frame(maxHeight: .infinity)
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        // green border if isAchievementUnlocked
+        // brightTeal border if isAchievementUnlocked
         .overlay(
             RoundedRectangle(cornerRadius: 20)
-                .strokeBorder(isAchievementUnlocked ? Color.green : Color.clear, lineWidth: 3)
+                .strokeBorder(isAchievementUnlocked ? Color.brightTeal : Color.clear, lineWidth: 3)
         )
         // for a glow effect
-        .shadow(color: isAchievementUnlocked ? .green.opacity(0.5) : .clear, radius: 5)
+        .shadow(color: isAchievementUnlocked ? .brightTeal.opacity(0.5) : .clear, radius: 5)
     }
 }
 
