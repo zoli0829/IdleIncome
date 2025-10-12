@@ -48,10 +48,16 @@ struct AchievementDetailView: View {
         .frame(maxWidth: .infinity)
         .frame(maxHeight: .infinity)
         .clipShape(RoundedRectangle(cornerRadius: 20))
+        // green border if isAchievementUnlocked
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .strokeBorder(isAchievementUnlocked ? Color.green : Color.clear, lineWidth: 3)
+        )
+        // for a glow effect
+        .shadow(color: isAchievementUnlocked ? .green.opacity(0.5) : .clear, radius: 5)
     }
 }
 
-// TODO: Need to figure out a way to make the preview work
-//#Preview {
-//    AchievementDetailView(achievement: Achievement(title: "Title", description: "Desc", maxProgress: 500, color: .green, lockedImage: "person", unlockedImage: "person.fill", progressText: "breaks taken"), currentProgress: )
-//}
+#Preview {
+    AchievementDetailView(achievement: Achievement(title: "Test Achievement", description: "Test Description", maxProgress: 5, color: .green, lockedImage: "person", unlockedImage: "person.fill", progressText: "Days"), currentProgress: .constant(0))
+}

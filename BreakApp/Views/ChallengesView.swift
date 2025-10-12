@@ -85,7 +85,7 @@ struct ChallengesView: View {
                         progressText: "day streak"
                     ),
                     currentProgress: Binding<Int>(
-                        get: { Int(viewModel.lifetimeEarnings) },
+                        get: { Int(viewModel.daySteak) },
                         set: { _ in }
                     )
                 )

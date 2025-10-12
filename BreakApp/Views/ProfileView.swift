@@ -32,6 +32,7 @@ struct ProfileView: View {
                     if !isEditingRate {
                         isEditingRate = true
                     } else {
+                        viewModel.saveHourlyRate()
                         isEditingRate = false
                     }
                     
@@ -45,7 +46,8 @@ struct ProfileView: View {
                     .font(.system(size: 20))
                     .bold()
                     .frame(maxWidth: .infinity)
-                    .frame(width: 150, height: 50)
+                    //.frame(width: 150, height: 50)
+                    .frame(height: 50)
                     .foregroundStyle(.black)
                     .background(.green)
                     .clipShape(RoundedRectangle(cornerRadius: 50))
@@ -103,15 +105,12 @@ struct ProfileView: View {
                 .frame(maxWidth: .infinity)
                 .foregroundStyle(.red)
                 .background(.containerGrey)
-                //.border(.red, width: 1) // stupid border gets fucky wucky by the rounded edges
                 .clipShape(RoundedRectangle(cornerRadius: 50))
                 .padding()
             }
             
             Spacer()
         }
-        //.frame(maxWidth: .infinity)
-        //.frame(maxHeight: .infinity)
         .padding()
         .background(.darkBackground)
     }

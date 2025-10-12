@@ -10,17 +10,17 @@ import Combine
 
 class TimerViewModel: ObservableObject {
     @Published var secondsElapsed: Int = 0
-    @Published var totalSecondsElapsed: Int = 0
+    @Published var totalSecondsElapsed: Int = 0 // need to save this every time the user closes the app and load it when the user opens it
     @Published var earnedMoneyFromThisBreak: Double = 0
     @Published var earnedToday: Double = 0
     @Published var earnedThisWeek: Double = 0
     @Published var earnedThisMonth: Double = 0
-    @Published var lifetimeEarnings: Double = 0
+    @Published var lifetimeEarnings: Double = 0 // need to save this every time the user closes the app and load it when the user opens it
     
-    var breaksTakenTotal: Int = 0 // take 50 breakes, take 100 breaks, take 500 breakes
-    var minutesSpentOnBreak: Int = 0 // spend 10 hours on break,spend 24 hours, spend 100 hours on breaks
-    var breaksTakenToday: Int = 0 // take 3 breaks in one day, take 5 breaks in one day, take 10 breaks per day
-    var daySteak: Int = 0 // take breakes 5 days in a row, take a break every day for 7 days
+    var breaksTakenTotal: Int = 0
+    var minutesSpentOnBreak: Int = 0
+    var breaksTakenToday: Int = 0
+    var daySteak: Int = 0
     var timeSpentOnBreaksTotal: Int = 0
     
     @Published var isRunning = false
@@ -113,6 +113,11 @@ class TimerViewModel: ObservableObject {
         timeSpentOnBreaksTotal += secondsElapsed / 60
         
         updateDayStreak()
+        // save totalSecondsElapsed and lifetimeEarnings
+        saveTotalSecondsElapsed()
+        saveLifetimeEarnings()
+        saveEarnedTodayThisWeekThisMonth()
+        saveEverythingElse()
         
         resetTimer()
     }
@@ -202,5 +207,58 @@ class TimerViewModel: ObservableObject {
         breaksTakenToday = 0
         daySteak = 0
         totalSecondsElapsed = 0
+    }
+    
+    // MARK: Save and load total time and total earned
+    func saveTotalSecondsElapsed() {
+        UserDefaults.standard.set(totalSecondsElapsed, forKey: "totalSecondsElapsed")
+    }
+    
+    func saveLifetimeEarnings() {
+        UserDefaults.standard.set(lifetimeEarnings, forKey: "lifetimeEarnings")
+    }
+    
+    func saveHourlyRate() {
+        UserDefaults.standard.set(hourlyRate, forKey: "hourlyRate")
+    }
+    
+    func saveEarnedTodayThisWeekThisMonth() {
+        UserDefaults.standard.set(earnedToday, forKey: "earnedToday")
+        UserDefaults.standard.set(earnedThisWeek, forKey: "earnedThisWeek")
+        UserDefaults.standard.set(earnedThisMonth, forKey: "earnedThisMonth")
+    }
+    
+    func saveEverythingElse() {
+        UserDefaults.standard.set(breaksTakenTotal, forKey: "breaksTakenTotal")
+        UserDefaults.standard.set(minutesSpentOnBreak, forKey: "minutesSpentOnBreak")
+        UserDefaults.standard.set(breaksTakenToday, forKey: "breaksTakenToday")
+        UserDefaults.standard.set(daySteak, forKey: "daySteak")
+        UserDefaults.standard.set(timeSpentOnBreaksTotal, forKey: "timeSpentOnBreaksTotal")
+    }
+    
+    func loadTotalSecondsElapsed() {
+        totalSecondsElapsed = UserDefaults.standard.integer(forKey: "totalSecondsElapsed")
+    }
+    
+    func loadLifetimeEarnings() {
+        lifetimeEarnings = UserDefaults.standard.double(forKey: "lifetimeEarnings")
+    }
+    
+    func loadHourlyRate() {
+        hourlyRate = UserDefaults.standard.double(forKey: "hourlyRate")
+    }
+    
+    func loadEarnedTodayThisWeekThisMonth() {
+        earnedToday = UserDefaults.standard.double(forKey: "earnedToday")
+        earnedThisWeek = UserDefaults.standard.double(forKey: "earnedThisWeek")
+        earnedThisMonth = UserDefaults.standard.double(forKey: "earnedThisMonth")
+    }
+    
+    func loadEverythingElse() {
+        breaksTakenTotal = UserDefaults.standard.integer(forKey: "breaksTakenTotal")
+        minutesSpentOnBreak = UserDefaults.standard.integer(forKey: "minutesSpentOnBreak")
+        breaksTakenToday = UserDefaults.standard.integer(forKey: "breaksTakenToday")
+        daySteak = UserDefaults.standard.integer(forKey: "daySteak")
+        timeSpentOnBreaksTotal = UserDefaults.standard.integer(forKey: "timeSpentOnBreaksTotal")
     }
 }

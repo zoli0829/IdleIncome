@@ -32,6 +32,11 @@ struct HomeView: View {
         .onAppear() {
             viewModel.checkResets()
             viewModel.loadStreak()
+            viewModel.loadHourlyRate()
+            viewModel.loadLifetimeEarnings()
+            viewModel.loadTotalSecondsElapsed()
+            viewModel.loadEarnedTodayThisWeekThisMonth()
+            viewModel.loadEverythingElse()
         }
         .onChange(of: scenePhase) { newPhase in
                     switch newPhase {

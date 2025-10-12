@@ -1,2 +1,2 @@
-[] App (timer) needs to run even when the phone is locked.
-[] When I close the app, it does not save the states
+[x] App (timer) needs to run even when the phone is locked.
+[x] When I close the app, it does not save the states
