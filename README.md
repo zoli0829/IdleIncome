@@ -10,7 +10,8 @@ IdleIncomee is a playful yet practical app that helps you track how much money y
 
 - Set your **hourly rate**.  
 - Start and stop breaks.  
-- Track **earnings in real-time** while on break.  
+- Track **earnings in real-time** while on break.
+- When the phone is locked, the timer pauses visually but keeps track of time in the background. Once the app is reopened, it adds the missed time so the total remains correct.
 - View **daily, weekly, monthly, and lifetime earnings**.  
 - Track total **time spent on breaks**.  
 
@@ -41,14 +42,6 @@ IdleIncomee is a playful yet practical app that helps you track how much money y
 - **SwiftUI** – User interface framework  
 - **Combine** – Reactive updates for earnings and timers  
 - **iOS** – Targeted for iPhone/iPad  
-
----
-
-## Work In Progress
-
-- More detailed statistics and challenges to gamify breaks.  
-- Automatic reset of daily, weekly, and monthly earnings.  
-- Improved UI/UX for tracking multiple breaks per day.  
 
 ---
 
