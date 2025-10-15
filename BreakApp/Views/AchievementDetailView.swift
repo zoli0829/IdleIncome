@@ -20,6 +20,10 @@ struct AchievementDetailView: View {
         currentProgress >= achievement.maxProgress
     }
     
+    var clampedProgress: Int {
+        min(currentProgress, achievement.maxProgress)
+    }
+    
     var body: some View {
         HStack(spacing: 25) {
             Image(systemName: isAchievementUnlocked ? achievement.unlockedImage : achievement.lockedImage)
@@ -39,7 +43,7 @@ struct AchievementDetailView: View {
                     .sliderThumbVisibility(.hidden)
                     .tint(.brightTeal)
                 
-                Text("\(currentProgress)/\(achievement.maxProgress) \(achievement.progressText)")
+                Text("\(clampedProgress)/\(achievement.maxProgress) \(achievement.progressText)")
                     .foregroundStyle(.aquamarine)
                 
             }
