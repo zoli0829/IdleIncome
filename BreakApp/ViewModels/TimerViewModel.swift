@@ -125,18 +125,19 @@ class TimerViewModel: ObservableObject {
     // MARK: - Period resets
     func resetDailyIfNeeded() {
         let today = Calendar.current.startOfDay(for: Date())
-        let lastSaved = UserDefaults.standard.object(forKey: "lastDailyReset") as? Date ?? today
+        let lastSaved = UserDefaults.standard.object(forKey: "lastDailyReset") as? Date ?? .distantPast
         
         if !Calendar.current.isDate(today, inSameDayAs: lastSaved) {
             earnedToday = 0
             breaksTakenToday = 0
             UserDefaults.standard.set(today, forKey: "lastDailyReset")
+            saveEarnedTodayThisWeekThisMonth()
         }
     }
     
     func resetWeeklyIfNeeded() {
             let today = Date()
-            let lastSaved = UserDefaults.standard.object(forKey: "lastWeeklyReset") as? Date ?? today
+        let lastSaved = UserDefaults.standard.object(forKey: "lastWeeklyReset") as? Date ?? .distantPast
             
             if !Calendar.current.isDate(today, equalTo: lastSaved, toGranularity: .weekOfYear) {
                 earnedThisWeek = 0
@@ -146,7 +147,7 @@ class TimerViewModel: ObservableObject {
         
         func resetMonthlyIfNeeded() {
             let today = Date()
-            let lastSaved = UserDefaults.standard.object(forKey: "lastMonthlyReset") as? Date ?? today
+            let lastSaved = UserDefaults.standard.object(forKey: "lastMonthlyReset") as? Date ?? .distantPast
             
             if !Calendar.current.isDate(today, equalTo: lastSaved, toGranularity: .month) {
                 earnedThisMonth = 0

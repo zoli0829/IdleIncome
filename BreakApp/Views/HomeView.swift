@@ -39,15 +39,18 @@ struct HomeView: View {
             viewModel.loadEverythingElse()
         }
         .onChange(of: scenePhase) { newPhase in
-                    switch newPhase {
-                    case .background:
-                        viewModel.appMovedToBackground()
-                    case .active:
-                        viewModel.appMovedToForeground()
-                    default:
-                        break
-                    }
-                }
+            switch newPhase {
+            case .background:
+                viewModel.appMovedToBackground()
+            case .active:
+                viewModel.appMovedToForeground()
+            default:
+                break
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            viewModel.checkResets()
+        }
     }
 }
 
