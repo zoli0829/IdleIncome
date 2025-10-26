@@ -1,6 +1,6 @@
 # IdleIncome
 
-IdleIncomee is a playful yet practical app that helps you track how much money you earn while taking breaks at work, whether it's a coffee break or a quick restroom stop. Set your hourly rate, start a break, and watch your earnings grow in real time!
+IdleIncome is a playful yet practical app that helps you track how much money you earn while taking breaks at work, whether it's a coffee break or a quick restroom stop. Set your hourly rate, start a break, and watch your earnings grow in real time!
 
 ---
 
