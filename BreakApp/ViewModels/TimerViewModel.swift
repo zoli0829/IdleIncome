@@ -118,7 +118,7 @@ class TimerViewModel: ObservableObject {
         saveLifetimeEarnings()
         saveEarnedTodayThisWeekThisMonth()
         saveEverythingElse()
-        
+                
         resetTimer()
     }
     
@@ -136,52 +136,53 @@ class TimerViewModel: ObservableObject {
     }
     
     func resetWeeklyIfNeeded() {
-            let today = Date()
+        let today = Date()
         let lastSaved = UserDefaults.standard.object(forKey: "lastWeeklyReset") as? Date ?? .distantPast
-            
-            if !Calendar.current.isDate(today, equalTo: lastSaved, toGranularity: .weekOfYear) {
-                earnedThisWeek = 0
-                UserDefaults.standard.set(today, forKey: "lastWeeklyReset")
-            }
+
+        if !Calendar.current.isDate(today, equalTo: lastSaved, toGranularity: .weekOfYear) {
+            earnedThisWeek = 0
+            UserDefaults.standard.set(today, forKey: "lastWeeklyReset")
+            saveEarnedTodayThisWeekThisMonth()
         }
+    }
         
-        func resetMonthlyIfNeeded() {
-            let today = Date()
-            let lastSaved = UserDefaults.standard.object(forKey: "lastMonthlyReset") as? Date ?? .distantPast
-            
-            if !Calendar.current.isDate(today, equalTo: lastSaved, toGranularity: .month) {
-                earnedThisMonth = 0
-                UserDefaults.standard.set(today, forKey: "lastMonthlyReset")
-            }
+    func resetMonthlyIfNeeded() {
+        let today = Date()
+        let lastSaved = UserDefaults.standard.object(forKey: "lastMonthlyReset") as? Date ?? .distantPast
+
+        if !Calendar.current.isDate(today, equalTo: lastSaved, toGranularity: .month) {
+            earnedThisMonth = 0
+            UserDefaults.standard.set(today, forKey: "lastMonthlyReset")
+            saveEarnedTodayThisWeekThisMonth()
         }
+    }
     
     // MARK: Day streak tracking
     private func updateDayStreak() {
         let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
-        
+        let todayStart = calendar.startOfDay(for: Date())
+
         let lastBreakDate = UserDefaults.standard.object(forKey: "lastBreakDate") as? Date
-        let streak = UserDefaults.standard.integer(forKey: "dayStreak")
-        
+        let savedStreak = UserDefaults.standard.integer(forKey: "dayStreak")
+
         if let lastDate = lastBreakDate {
             if calendar.isDateInYesterday(lastDate) {
-                // took a break yesterday, increment streak
-                daySteak += 1
-            } else if calendar.isDate(lastDate, inSameDayAs: today) {
-                // already took a break today, don't change the streak
-                daySteak = streak
+                // yesterday -> increment saved streak
+                daySteak = max(1, savedStreak) + 1
+            } else if calendar.isDate(lastDate, inSameDayAs: todayStart) {
+                // already took a break today -> keep saved streak
+                daySteak = savedStreak
             } else {
-                // missed a day or first break after a gap - reset streak
+                // missed a day or gap -> reset streak to 1
                 daySteak = 1
             }
-        }
-        else {
+        } else {
             // first ever break
             daySteak = 1
         }
-        
+
         UserDefaults.standard.set(daySteak, forKey: "dayStreak")
-        UserDefaults.standard.set(today, forKey: "lastBreakDate")
+        UserDefaults.standard.set(todayStart, forKey: "lastBreakDate")
     }
     
     // call in the onAppear()
@@ -246,7 +247,10 @@ class TimerViewModel: ObservableObject {
     }
     
     func loadHourlyRate() {
-        hourlyRate = UserDefaults.standard.double(forKey: "hourlyRate")
+        let stored = UserDefaults.standard.double(forKey: "hourlyRate")
+        if stored > 0 {
+            hourlyRate = stored
+        }
     }
     
     func loadEarnedTodayThisWeekThisMonth() {
